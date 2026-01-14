@@ -1,0 +1,53 @@
+import java.util.Scanner;
+import java.util.regex.*;
+
+public class RegexValidation {
+    static Scanner sc = new Scanner(System.in);
+
+    static boolean validate(String input, String regex) {
+        return Pattern.matches(regex, input);
+    }
+
+    public static void main(String[] args) {
+        int choice;
+        try {
+            do {
+                System.out.println("\n1.Mobile 2.Email 3.Username 4.Password 5.Exit");
+                choice = sc.nextInt();
+                sc.nextLine();
+
+                switch (choice) {
+                    case 1:
+                        System.out.print("Enter Mobile: ");
+                        String mob = sc.nextLine();
+                        System.out.println(validate(mob, "[6-9][0-9]{9}") ?
+                                "Welcome!" : "Invalid Mobile");
+                        break;
+
+                    case 2:
+                        System.out.print("Enter Email: ");
+                        String email = sc.nextLine();
+                        System.out.println(validate(email, "[a-zA-Z0-9._]+@[a-z]+\\.[a-z]{2,3}") ?
+                                "Welcome!" : "Invalid Email");
+                        break;
+
+                    case 3:
+                        System.out.print("Enter Username: ");
+                        String user = sc.nextLine();
+                        System.out.println(validate(user, "[a-zA-Z]{5,}") ?
+                                "Welcome!" : "Invalid Username");
+                        break;
+
+                    case 4:
+                        System.out.print("Enter Password: ");
+                        String pass = sc.nextLine();
+                        System.out.println(validate(pass, "(?=.*\\d)(?=.*[A-Z]).{6,}") ?
+                                "Welcome!" : "Invalid Password");
+                        break;
+                }
+            } while (choice != 5);
+        } catch (Exception e) {
+            System.out.println("Exception Occurred");
+        }
+    }
+}
