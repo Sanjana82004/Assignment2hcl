@@ -1,0 +1,50 @@
+import java.util.*;
+import java.util.regex.*;
+
+interface EmployeeOperations {
+    void addEmployee(int id, String name);
+    void display();
+    void search(int id);
+    void remove(int id);
+}
+
+public class EmployeeManager implements EmployeeOperations {
+    HashMap<Integer, String> hm = new HashMap<>();
+    Hashtable<Integer, String> ht = new Hashtable<>();
+    TreeMap<Integer, String> tm = new TreeMap<>();
+
+    public void addEmployee(int id, String name) {
+        if (!Pattern.matches("[A-Za-z ]+", name))
+            throw new IllegalArgumentException("Invalid Name");
+
+        hm.put(id, name);
+        ht.put(id, name);
+        tm.put(id, name);
+    }
+
+    public void display() {
+        System.out.println("HashMap: " + hm);
+        System.out.println("Hashtable: " + ht);
+        System.out.println("TreeMap: " + tm);
+    }
+
+    public void search(int id) {
+        System.out.println("Employee: " + hm.get(id));
+    }
+
+    public void remove(int id) {
+        hm.remove(id);
+        ht.remove(id);
+        tm.remove(id);
+    }
+
+    public static void main(String[] args) {
+        try {
+            EmployeeManager em = new EmployeeManager();
+            em.addEmployee(1, "Amit");
+            em.display();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
