@@ -1,0 +1,56 @@
+import java.util.*;
+import java.util.regex.*;
+
+class UniversityStudent {
+    int id;
+    String name;
+    String course;
+    int marks;
+
+    UniversityStudent(int id, String name, String course, int marks) {
+        this.id = id;
+        this.name = name;
+        this.course = course;
+        this.marks = marks;
+    }
+}
+
+public class UniversitySystem {
+    ArrayList<UniversityStudent> students = new ArrayList<>();
+    HashMap<Integer, UniversityStudent> map = new HashMap<>();
+    Set<String> courses = new HashSet<>();
+
+    void addStudent(UniversityStudent s) {
+        if (map.containsKey(s.id))
+            throw new IllegalArgumentException("Duplicate ID");
+
+        students.add(s);
+        map.put(s.id, s);
+        courses.add(s.course);
+    }
+
+    void displayStudents() {
+        for (UniversityStudent s : students)
+            System.out.println(s.id + " " + s.name + " " + s.course + " " + s.marks);
+    }
+
+    void sortByMarks() {
+        students.sort((a, b) -> b.marks - a.marks);
+    }
+
+    void convertToTreeMap() {
+        TreeMap<Integer, UniversityStudent> tm = new TreeMap<>(map);
+        System.out.println("TreeMap Converted");
+    }
+
+    public static void main(String[] args) {
+        try {
+            UniversitySystem us = new UniversitySystem();
+            us.addStudent(new UniversityStudent(1, "Sanjana", "CSE", 85));
+            us.displayStudents();
+            us.sortByMarks();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
